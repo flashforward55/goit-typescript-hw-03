@@ -1,6 +1,6 @@
 // Клас Key
 class Key {
-    constructor(private signature: number = Math.random()) { }
+    private signature: number = Math.random()
 
     getSignature(): number {
         return this.signature;
@@ -9,8 +9,7 @@ class Key {
 
 // Клас Person
 class Person {
-    constructor(private key: Key) {
-    }
+    constructor(private key: Key) { }
 
     getKey(): Key {
         return this.key;
@@ -21,9 +20,7 @@ class Person {
 abstract class House {
     protected door: boolean = false;
     protected tenants: Person[] = [];
-    constructor(protected key: Key) {
-        this.key = key;
-    }
+    constructor(protected key: Key) { }
 
     abstract openDoor(key: Key): void;
 
@@ -40,11 +37,10 @@ abstract class House {
 // Клас MyHouse, який успадковується від House
 class MyHouse extends House {
     openDoor(key: Key): void {
-        if (key.getSignature() > 0.5) {
+        if (key.getSignature() === this.key.getSignature()) {
             this.door = true;
             console.log('The door is open.');
         } else {
-            this.door = false;
             console.log('Wrong key. The door remains closed.');
         }
     }
